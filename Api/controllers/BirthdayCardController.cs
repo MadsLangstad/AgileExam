@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using AgileExam.Contexts;
 using AgileExam.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace AgileExam.Controllers
 {
@@ -10,52 +10,56 @@ namespace AgileExam.Controllers
     public class BirthdayCardController : ControllerBase
     {
         private readonly CardContext _context;
-        private readonly IWebHostEnvironment _environment;
 
-        public BirthdayCardController(CardContext context, IWebHostEnvironment environment)
+        public BirthdayCardController(CardContext context)
         {
             _context = context;
-            _environment = environment;
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<BirthdayCard>> Create(BirthdayCard card)
-        {
-            _context.BirthdayCards.Add(card);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = card.Id }, card);
         }
 
         [HttpGet]
         public async Task<ActionResult<List<BirthdayCard>>> Get()
         {
-            var birthdayCards = await _context.BirthdayCards.ToListAsync();
-            return Ok(birthdayCards);
+            return await _context.BirthdayCards.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BirthdayCard>> GetById(int id)
+        public async Task<ActionResult<BirthdayCard>> Get(int id)
         {
             var card = await _context.BirthdayCards.FindAsync(id);
             if (card == null) return NotFound();
-            return Ok(card);
+            return card;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<BirthdayCard>> Post(BirthdayCard card)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            card.User = null;
+            _context.BirthdayCards.Add(card);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = card.BirthdayCardId }, card);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, BirthdayCard updatedCard)
+        public async Task<IActionResult> Put(int id, BirthdayCard card)
         {
-            if (id != updatedCard.Id) return BadRequest();
+            if (id != card.BirthdayCardId) return BadRequest();
 
-            _context.Entry(updatedCard).State = EntityState.Modified;
-
+            _context.Entry(card).State = EntityState.Modified;
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardExists(id)) return NotFound();
-                else throw;
+                if (!_context.BirthdayCards.Any(e => e.BirthdayCardId == id))
+                    return NotFound();
+                else
+                    throw;
             }
 
             return NoContent();
@@ -70,11 +74,6 @@ namespace AgileExam.Controllers
             _context.BirthdayCards.Remove(card);
             await _context.SaveChangesAsync();
             return NoContent();
-        }
-
-        private bool CardExists(int id)
-        {
-            return _context.BirthdayCards.Any(e => e.Id == id);
         }
     }
 }
