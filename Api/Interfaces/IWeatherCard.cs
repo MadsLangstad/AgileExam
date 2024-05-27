@@ -1,16 +1,17 @@
-namespace AgileExam.Interfaces;
-
-public interface IWeatherCard
+namespace AgileExam.Interfaces
 {
-    public int Id { get; set; }
-    public string City { get; set; }
-    public string Country { get; set; }
-    public string Description { get; set; }
-    public string Temperature { get; set; }
-    public string Humidity { get; set; }
-    public string Pressure { get; set; }
-    public string Windspeed { get; set; }
-    public string Rain { get; set; }
-    public string Clouds { get; set; }
-    public string Icon { get; set; }
+    public interface IWeatherCard
+    {
+        int Id { get; set; }
+        string City { get; set; }
+        string Country { get; set; }
+        string Description { get; set; }
+        string Temperature { get; set; }
+        string Humidity { get; set; }
+        string Pressure { get; set; }
+        string Windspeed { get; set; }
+        string Rain { get; set; }
+        string Clouds { get; set; }
+        string Icon { get; set; }
+    }
 }

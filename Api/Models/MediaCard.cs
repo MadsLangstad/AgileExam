@@ -1,10 +1,10 @@
-namespace AgileExam.Models;
 using AgileExam.Interfaces;
 
-public class MediaCard : IMeadiaCard
+namespace AgileExam.Models
 {
-    public int Id { get; set; }
-    public required string MediaUrl { get; set; }
-
-
+    public class MediaCard : IMediaCard
+    {
+        public int Id { get; set; }
+        public required string MediaUrl { get; set; }
+    }
 }
