@@ -1,7 +1,8 @@
-namespace AgileExam.Interfaces;
-
-public interface IMeadiaCard
+namespace AgileExam.Interfaces
 {
-    public int Id { get; set; }
-    public string MediaUrl { get; set; }
+    public interface IMediaCard
+    {
+        int Id { get; set; }
+        string MediaUrl { get; set; }
+    }
 }

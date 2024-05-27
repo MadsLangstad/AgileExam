@@ -1,9 +1,10 @@
-namespace AgileExam.Interfaces;
-
-public interface IBirthdayCard
+namespace AgileExam.Interfaces
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string ImageUrl { get; set; }
-    public string Text { get; set; }
+    public interface IBirthdayCard
+    {
+        int Id { get; set; }
+        string Title { get; set; }
+        string ImageUrl { get; set; }
+        string Text { get; set; }
+    }
 }
