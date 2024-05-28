@@ -51,7 +51,8 @@ const UploadButton: React.FC = () => {
             });
             setUploadStatus(`File uploaded successfully: ${response.data.filePath}`);
         } catch (error) {
-            setUploadStatus(`Error uploading file: ${error.response.data}`);
+            const errorMessage = error.response?.data || 'An error occurred while uploading the file.';
+            setUploadStatus(`Error uploading file: ${errorMessage}`);
         }
     };
 
@@ -68,12 +69,12 @@ const UploadButton: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-4 bg-blue-700 rounded-lg shadow-md space-y-4">
+        <div className="flex w-1/3 flex-col items-center justify-center p-4 bg-blue-700 rounded-lg shadow-md space-y-4">
             <h1 className="text-2xl font-bold text-white mb-4">File Upload</h1>
             <input
                 type="file"
                 onChange={handleFileChange}
-                className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                className="block w-96 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
             />
             <button
                 onClick={handleFileUpload}
@@ -87,7 +88,7 @@ const UploadButton: React.FC = () => {
                 </p>
             )}
             <div
-                className="w-full h-32 border-2 border-dashed border-gray-300 flex items-center justify-center rounded-lg text-center text-white"
+                className="w-96 h-32 border-2 border-dashed border-gray-300 flex items-center justify-center rounded-lg text-center text-white"
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onDragEnter={handleDragEnter}

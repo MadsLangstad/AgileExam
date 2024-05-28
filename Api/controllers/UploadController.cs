@@ -1,8 +1,4 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
@@ -15,13 +11,9 @@ namespace Api.Controllers
         {
             if (file == null || file.Length == 0)
             {
-                return BadRequest("No file uploaded.");
+                return BadRequest(new { message = "No file uploaded." });
             }
 
-            // Log the file content type for debugging
-            System.Console.WriteLine($"Uploaded file type: {file.ContentType}");
-
-            // Validating file types
             var validTypes = new[] 
             { 
                 "image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp", "image/svg+xml", "image/tiff", "image/x-icon",
@@ -29,7 +21,7 @@ namespace Api.Controllers
             };
             if (!validTypes.Contains(file.ContentType))
             {
-                return BadRequest("Invalid file type. Only images and videos are allowed.");
+                return BadRequest(new { message = "Invalid file type. Only images and videos are allowed." });
             }
 
             var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
