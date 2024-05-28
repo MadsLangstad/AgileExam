@@ -1,15 +1,9 @@
-import React from 'react';
-import { LogInPage } from './pages';
-import UploadButton from './components/upload/UploadButton';
-
+import RoutingMain from "./routing/RoutingMain.tsx";
 function App() {
   return (
     <>
-      <UploadButton />
-      <LogInPage />
-      
+        <RoutingMain></RoutingMain>
     </>
   );
 }
-
 export default App;
