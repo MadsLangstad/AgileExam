@@ -2,25 +2,27 @@ const LogInPage = () => {
   return (
     <div className={"w-screen h-screen"}>
       <div className={"grid grid-cols-2"}>
-        <div className={"text-center pl-2"}>
-          <img
-            className={"object-center"}
-            src={""}
-            alt={`picture of a woman, dog and a computer at a desk`}
-          />
+        <div className={"text-center pl-2 pb-2"}>
+          <div className={"flex justify-center items-center pt-12"}>
+            <img
+              src={"/public/LogInPicture.png"}
+              alt={`picture of a woman, dog and a computer at a desk`}
+            />
+          </div>
           <h3 className={"text-blue-700"}>KPMG Super Screen Infoplatform</h3>
           <p>
             Unleash your creative side, and take part in sharing motivation or
             reminders in your office
           </p>
         </div>
-        <div className={"bg-sky-600\t pl-2"}>
-          <img
-            className={"object-center"}
-            src={"/public/KPMG_logo_blue.png"}
-            alt={"KPMG Logo"}
-            width="20%"
-          />
+        <div className={"bg-sky-600\t pl-2 pb-2"}>
+          <div className={"flex justify-center items-center pt-12"}>
+            <img
+              src={"/public/KPMG_logo_blue.png"}
+              alt={"KPMG Logo"}
+              width="50%"
+            />
+          </div>
           <p>Username or Email</p>
           <input type="text" id="username" />
           <p>Password</p>
