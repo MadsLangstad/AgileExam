@@ -4,11 +4,11 @@ import { LogInPage } from "../pages";
 import { WeatherCardProvider } from "../contexts/WeatherCardContext.tsx";
 import { MediaCardProvider } from "../contexts/MediaCardContext.tsx";
 import { BirthdayCardProvider } from "../contexts/BirthdayCardContext.tsx";
+import CardPage from "../pages/CardPage.tsx";
 
 const RoutingMain = () => {
   return (
     <BrowserRouter>
-      <header className="container-fluid px-0">/* Her kommer navbar */</header>
       <main className="container">
         <WeatherCardProvider>
           <MediaCardProvider>
@@ -18,6 +18,10 @@ const RoutingMain = () => {
                 <Route
                   path="dashboard"
                   element={<DashBoardPage />}
+                ></Route>
+                <Route
+                    path="now-showing"
+                    element={<CardPage />}
                 ></Route>
               </Routes>
             </BirthdayCardProvider>
