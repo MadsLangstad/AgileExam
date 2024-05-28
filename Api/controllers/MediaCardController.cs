@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using AgileExam.Contexts;
 using AgileExam.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace AgileExam.Controllers
 {
@@ -10,61 +10,55 @@ namespace AgileExam.Controllers
     public class MediaCardController : ControllerBase
     {
         private readonly CardContext _context;
-        private readonly IWebHostEnvironment _environment;
 
-        public MediaCardController(CardContext context, IWebHostEnvironment environment)
+        public MediaCardController(CardContext context)
         {
             _context = context;
-            _environment = environment;
         }
 
-        // Create
-        [HttpPost]
-        public async Task<ActionResult<MediaCard>> Create(MediaCard card)
-        {
-            _context.MediaCards.Add(card);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = card.Id }, card);
-        }
-
-        // Read
         [HttpGet]
         public async Task<ActionResult<List<MediaCard>>> Get()
         {
-            var mediaCards = await _context.MediaCards.ToListAsync();
-            return Ok(mediaCards);
+            return await _context.MediaCards.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<MediaCard>> GetById(int id)
+        public async Task<ActionResult<MediaCard>> Get(int id)
         {
             var card = await _context.MediaCards.FindAsync(id);
             if (card == null) return NotFound();
-            return Ok(card);
+            return card;
         }
 
-        // Update
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, MediaCard updatedCard)
+        [HttpPost]
+        public async Task<ActionResult<MediaCard>> Post(MediaCard card)
         {
-            if (id != updatedCard.Id) return BadRequest();
+            _context.MediaCards.Add(card);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = card.MediaCardId }, card);
+        }
 
-            _context.Entry(updatedCard).State = EntityState.Modified;
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, MediaCard card)
+        {
+            if (id != card.MediaCardId) return BadRequest();
 
+            _context.Entry(card).State = EntityState.Modified;
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardExists(id)) return NotFound();
-                else throw;
+                if (!_context.MediaCards.Any(e => e.MediaCardId == id))
+                    return NotFound();
+                else
+                    throw;
             }
 
             return NoContent();
         }
 
-        // Delete
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -73,12 +67,8 @@ namespace AgileExam.Controllers
 
             _context.MediaCards.Remove(card);
             await _context.SaveChangesAsync();
-            return NoContent();
-        }
 
-        private bool CardExists(int id)
-        {
-            return _context.MediaCards.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }
