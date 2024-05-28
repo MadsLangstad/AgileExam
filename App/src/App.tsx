@@ -1,10 +1,13 @@
-import { LogInPage } from "./pages";
+import React from 'react';
+import { LogInPage } from './pages';
+import UploadButton from './components/upload/UploadButton';
 
 function App() {
   return (
     <>
-      <h1 className="text-pink-700">Agile Exam</h1>
-      <LogInPage></LogInPage>
+      <UploadButton />
+      <LogInPage />
+      
     </>
   );
 }
