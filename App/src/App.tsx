@@ -1,5 +1,4 @@
 import RoutingMain from "./routing/RoutingMain.tsx";
-
 function App() {
   return (
     <>
@@ -7,5 +6,4 @@ function App() {
     </>
   );
 }
-
 export default App;
