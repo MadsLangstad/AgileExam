@@ -16,7 +16,7 @@ const RoutingMain = () => {
               <Routes>
                 <Route path="/" element={<LogInPage />}></Route>
                 <Route
-                  path="dashboard-page"
+                  path="dashboard"
                   element={<DashBoardPage />}
                 ></Route>
               </Routes>
