@@ -1,9 +1,9 @@
-import { LogInPage } from "./pages";
+import RoutingMain from "./routing/RoutingMain.tsx";
 
 function App() {
   return (
     <>
-      <LogInPage></LogInPage>
+        <RoutingMain></RoutingMain>
     </>
   );
 }
