@@ -1,2 +1,124 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment files
+.env
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build artifacts
+*.build.js
+*.build.json
+build/
+out/
+coverage/
+coverage-final.json
+.cache/
+.cache-loader/
+.nyc_output/
+
+# OS-specific files
+# macOS
+*.DS_Store
+*.AppleDouble
+*.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# IDE and editor config files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Migrations
+Api/Migrations/
+Api/obj/
+
+# Bin directory
+Api/bin/
+Api/obj/
+bin/
+obj/
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Specific to Api
+Api/agileexam.db
+Api/agileexam.db-shm
+Api/agileexam.db-wal
+Api/super_screen.db
+
+# Generated files
+Api/obj/
+Api/bin/
+
+# Other build outputs
+*.dll
+*.exe
+*.so
+*.dylib
+*.exe
+*.pdb
+*.mdb
+*.manifest
+*.app
+*.ipa
+
+# Configuration files
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+=======
 Api/obj/*
 Api/bin/*
