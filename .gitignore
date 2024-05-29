@@ -119,3 +119,6 @@ Api/bin/
 appsettings.json
 appsettings.Development.json
 appsettings.Production.json
+=======
+Api/obj/*
+Api/bin/*

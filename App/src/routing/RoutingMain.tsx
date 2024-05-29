@@ -5,6 +5,7 @@ import { WeatherCardProvider } from "../contexts/WeatherCardContext.tsx";
 import { MediaCardProvider } from "../contexts/MediaCardContext.tsx";
 import { BirthdayCardProvider } from "../contexts/BirthdayCardContext.tsx";
 import Navbar from "../components/shared/NavbarNavigation.tsx";
+import CardPage from "../pages/CardPage.tsx";
 
 const RoutingMain = () => {
   return (
@@ -19,8 +20,12 @@ const RoutingMain = () => {
               <Routes>
                 <Route path="/" element={<LogInPage />}></Route>
                 <Route
-                  path="dashboard-page"
+                  path="dashboard"
                   element={<DashBoardPage />}
+                ></Route>
+                <Route
+                    path="now-showing"
+                    element={<CardPage />}
                 ></Route>
               </Routes>
             </BirthdayCardProvider>
