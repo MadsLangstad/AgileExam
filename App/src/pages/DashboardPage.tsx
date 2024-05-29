@@ -1,4 +1,5 @@
 import AddPost from "../components/dashboard/AddPost";
+import AnnouncementComponent from '../components/dashboard/AnnouncementComponent';
 
 const DashBoardPage = () => {
   return (
@@ -12,7 +13,9 @@ const DashBoardPage = () => {
         <div className="bg-slate-300">
           <AddPost />
         </div>
-        <div className="bg-slate-300">Make Announcement</div>
+        <div className="bg-slate-300 flex items-center justify-center">
+          <AnnouncementComponent />
+        </div>
       </div>
     </div>
   );
