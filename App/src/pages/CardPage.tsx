@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {useNavigate} from "react-router-dom";
 
 const CardPage = () => {
     // Array of image paths
@@ -24,14 +25,22 @@ const CardPage = () => {
     // Select the current image based on the current index
     const currentImg = images[currentIndex];
 
+    const navigate = useNavigate();
+    const handleOnClick = () => {
+        navigate("/dashboard"); // Replace with your actual route
+    };
+
     return (
-        <div className="w-screen h-screen overflow-hidden flex justify-center items-center">
+        <button className="w-full h-full overflow-hidden flex justify-center items-center object-cover"
+                style={{ border: "none", padding: 0, background: "none"}}
+                onClick={handleOnClick}
+        >
             <img
                 src={currentImg}
                 className="object-cover w-full h-full"
                 alt="Full screen"
             />
-        </div>
+        </button>
     );
 };
 
