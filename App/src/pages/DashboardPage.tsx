@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import CardPage from "./CardPage";
+import AddPost from "../components/dashboard/AddPost";
+import AnnouncementComponent from '../components/dashboard/AnnouncementComponent';
 
 const DashBoardPage = () => {
     const navigate = useNavigate();
 
     const handleNowShowingClick = () => {
-        navigate("/now-showing"); // Replace with your actual route
+        navigate("/now-showing"); 
     };
 
     return (
@@ -25,8 +27,12 @@ const DashBoardPage = () => {
                     </button>
                 </div>
                 <div className="bg-gray-200">Queue</div>
-                <div className="bg-gray-200">Add new post</div>
-                <div className="bg-gray-200">Make Announcement</div>
+                <div className="bg-gray-200">
+                  <AddPost />
+                </div>
+                <div className="bg-gray-200">
+                  <AnnouncementComponent />
+               </div>
             </div>
         </div>
     );
