@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import CardPage from "./CardPage";
 import AddPost from "../components/dashboard/AddPost";
-import AnnouncementComponent from '../components/dashboard/AnnouncementComponent';
+import AnnouncementComponent from "../components/dashboard/AnnouncementComponent";
+import Navbar from "../components/dashboard/Navbar";
 
 const DashBoardPage = () => {
     const navigate = useNavigate();
@@ -12,11 +13,11 @@ const DashBoardPage = () => {
 
     return (
         <div>
-            <div className="h-40 w-full bg-red-400">
-                <h1>DashBoard Page | HEADER GOES HERE</h1>
+            <div>
+                <Navbar />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-100 w-100">
-                <div className="bg-gray-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen">
+                <div className="bg-slate-300">
                     <p>Now showing</p>
                     <button
                         className="w-120 h-auto"
@@ -26,11 +27,11 @@ const DashBoardPage = () => {
                         <CardPage />
                     </button>
                 </div>
-                <div className="bg-gray-200">Queue</div>
-                <div className="bg-gray-200">
+                <div className="bg-slate-300">Queue</div>
+                <div className="bg-slate-300 flex items-center justify-center">
                   <AddPost />
                 </div>
-                <div className="bg-gray-200">
+                <div className="bg-slate-300 flex items-center justify-center">
                   <AnnouncementComponent />
                </div>
             </div>

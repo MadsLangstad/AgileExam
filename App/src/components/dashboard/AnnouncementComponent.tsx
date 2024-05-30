@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import AnnouncementModal from './AnnouncementModal';
+import React, { useState } from "react";
+import AnnouncementModal from "./AnnouncementModal";
 
 const AnnouncementComponent: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [announcement, setAnnouncement] = useState<string>('');
-
+  const [announcement, setAnnouncement] = useState<string>("");
 
   const handleButtonClick = () => {
     setModalVisible(true);
@@ -21,19 +20,18 @@ const AnnouncementComponent: React.FC = () => {
         onClose={handleCloseModal}
         announcement={announcement}
         setAnnouncement={setAnnouncement}
-        clearAnnouncement={() => setAnnouncement('')}
-
+        clearAnnouncement={() => setAnnouncement("")}
       />
 
       <div className="p-6 rounded-lg w-96">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-blue-800">Make an announcement</h2>
+          <h2 className="text-2xl font-bold text-blue-800">
+            Make an announcement
+          </h2>
           <button
             onClick={handleButtonClick}
-            className="bg-blue-800 text-white rounded-full w-8 h-8 flex items-center justify-center"
-          >
-            +
-          </button>
+            className="bg-white rounded-full w-8 h-8 bg-[url('/add_icon.svg')] bg-contain bg-no-repeat bg-center"
+          ></button>
         </div>
         <input
           type="text"
