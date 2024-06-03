@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using AgileExam.Contexts;
+using AgileExam.Models;
+
 
 namespace Api.Controllers
 {
@@ -6,8 +9,15 @@ namespace Api.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
+        private readonly CardContext _context;
+
+        public UploadController(CardContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile file, [FromQuery] int userId)
         {
             if (file == null || file.Length == 0)
             {
@@ -31,14 +41,28 @@ namespace Api.Controllers
                 Directory.CreateDirectory(uploadPath);
             }
 
-            var filePath = Path.Combine(uploadPath, file.FileName);
+            var fileName = Path.GetRandomFileName() + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(uploadPath, fileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            return Ok(new { filePath = $"/{file.FileName}" });
+            var fileUrl = $"/{fileName}";
+
+            var mediaCard = new MediaCard
+            {
+                Url = fileUrl,
+                UserId = userId,
+                FileType = file.ContentType,
+                UploadDate = DateTime.UtcNow
+            };
+
+            _context.MediaCards.Add(mediaCard);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { filePath = fileUrl });
         }
     }
 }
