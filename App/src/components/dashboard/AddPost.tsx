@@ -16,7 +16,7 @@ const AddPost = () => {
     <div className="p-6">
       <UploadModal isVisible={isModalVisible} onClose={handleCloseModal} />
       <div className="flex gap-4 justify-center items-center mb-4">
-        <h1 className=" text-2xl font-bold text-blue-800">Add To Queue</h1>
+        <h1 className=" text-2xl font-bold text-blue-800">Add new card</h1>
         <div className="bg-blue-800 text-white rounded-full w-8 h-8 bg-[url('/tooltip_icon.svg')] bg-contain bg-no-repeat bg-center"></div>
       </div>
       <div className="flex justify-center items-center gap-4">

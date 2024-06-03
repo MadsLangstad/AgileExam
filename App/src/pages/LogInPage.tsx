@@ -1,5 +1,5 @@
 import frontSideImg from "../../public/The_Little_Things_Working.png";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LogInPage = () => {
   const navigate = useNavigate();
@@ -7,7 +7,7 @@ const LogInPage = () => {
   const handleSignIn = () => {
     // Logic for handling sign-in can be added here
     // For now, we'll just navigate to the dashboard, needs further development to handel username and password
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   return (
@@ -51,13 +51,14 @@ const LogInPage = () => {
             className={"rounded-md h-10 w-2/3 "}
           />
           <p>---------- Forgot Password ----------</p>
-            <button
-                className={
-                  "object-center btn bg-blue-900 text-white rounded w-2/3 h-10 mt-4"
-                }
-                onClick={handleSignIn}
-            >Sign In
-            </button>
+          <button
+            className={
+              "object-center btn bg-blue-900 text-white rounded w-2/3 h-10 mt-4"
+            }
+            onClick={handleSignIn}
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </div>
