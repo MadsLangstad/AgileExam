@@ -1,5 +1,6 @@
 import frontSideImg from "../../public/The_Little_Things_Working.png";
-import {useNavigate} from "react-router-dom";
+import kpmgWhiteLogo from "../../public/kpmg-logo-white.png";
+import { useNavigate } from "react-router-dom";
 
 const LogInPage = () => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ const LogInPage = () => {
   const handleSignIn = () => {
     // Logic for handling sign-in can be added here
     // For now, we'll just navigate to the dashboard, needs further development to handel username and password
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   return (
@@ -34,30 +35,43 @@ const LogInPage = () => {
         >
           <img
             className={"object-center mb-8"}
-            src={"/public/KPMG_logo_blue.png"}
+            src={kpmgWhiteLogo}
+            //src={"/public/KPMG_logo_blue.png"}
             alt={"KPMG Logo"}
-            width="20%"
+            width="80%"
           />
-          <p className={"font-thin"}>Username or Email</p>
-          <input
-            type="text"
-            id="username"
-            className={"rounded-md h-10 w-2/3 mb-8"}
-          />
-          <p className={"font-thin"}>Password</p>
-          <input
-            type="text"
-            id="password"
-            className={"rounded-md h-10 w-2/3 "}
-          />
-          <p>---------- Forgot Password ----------</p>
-            <button
-                className={
-                  "object-center btn bg-blue-900 text-white rounded w-2/3 h-10 mt-4"
-                }
-                onClick={handleSignIn}
-            >Sign In
-            </button>
+          <div className={"w-2/3 mb-8"}>
+            <p className={"font-thin text-white text-left mb-2"}>
+              Username or Email
+            </p>
+            <input
+              type="text"
+              id="username"
+              className={"rounded-md h-10 w-full"}
+            />
+          </div>
+          <div className={"w-2/3 mb-2"}>
+            <p className={"font-thin text-white text-left mb-2"}>Password</p>
+            <input
+              type="text"
+              id="password"
+              className={"rounded-md h-10 w-full "}
+            />{" "}
+          </div>
+          <br />
+          <div className={"flex items-center w-2/3 mt-4"}>
+            <hr className={"flex-grow "} />
+            <p className={"text-white mx-6 italic"}>Forgot Password</p>
+            <hr className={"flex-grow"} />
+          </div>
+          <button
+            className={
+              "transition transform hover:scale-105 duration-300 ease-in-out object-center btn bg-blue-900 text-white font-bold rounded w-2/3 mt-8 hover:bg-teal-600 h-16"
+            }
+            onClick={handleSignIn}
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </div>
