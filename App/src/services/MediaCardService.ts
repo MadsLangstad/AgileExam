@@ -12,7 +12,7 @@ const MediaCardService = (() => {
             console.log(result.data);
             return result.data;
         } catch (error) {
-            console.error("Error in getting all drivers", error);
+            console.error("Error in getting all card", error);
         }
     };
     const getById = async (id: number) => {
