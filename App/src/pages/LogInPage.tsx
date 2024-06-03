@@ -61,14 +61,12 @@ const LogInPage = () => {
           <br />
           <div className={"flex items-center w-2/3 mt-4"}>
             <hr className={"flex-grow "} />
-            <p className={"not-italic text-white mx-6 hover:italic"}>
-              Forgot Password
-            </p>
+            <p className={"text-white mx-6 italic"}>Forgot Password</p>
             <hr className={"flex-grow"} />
           </div>
           <button
             className={
-              "transition transform hover:scale-105 duration-300 ease-in-out object-center btn bg-blue-900 text-white font-bold rounded w-2/3 h-12 mt-8 hover:bg-teal-600 h-16"
+              "transition transform hover:scale-105 duration-300 ease-in-out object-center btn bg-blue-900 text-white font-bold rounded w-2/3 mt-8 hover:bg-teal-600 h-16"
             }
             onClick={handleSignIn}
           >
