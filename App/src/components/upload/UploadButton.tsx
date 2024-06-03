@@ -60,7 +60,7 @@ const UploadButton: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5017/api/upload/upload",
+        "http://localhost:5017/api/upload/upload?userId=1", // Include the userId
         formData,
         {
           headers: {
