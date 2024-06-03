@@ -37,24 +37,29 @@ const Queue: React.FC = () => {
   const visibleCards = cards.slice(currentIndex, currentIndex + 3);
 
   return (
-    <div className="queue flex h-full w-full justify-center items-center gap-4">
-      <button
-        className="text-blue-800 font-bold text-5xl"
-        onClick={prev}
-        disabled={currentIndex === 0}
-      >
-        &lt;
-      </button>
-      {visibleCards.map((card, index) => (
-        <Queslot key={card.mediaCardId} card={card} />
-      ))}
-      <button
-        className="text-blue-800 font-bold text-5xl"
-        onClick={next}
-        disabled={currentIndex >= cards.length - 3}
-      >
-        &gt;
-      </button>
+    <div className="queue flex flex-col h-full w-full justify-center items-center gap-4">
+      <div>
+        <h2 className="text-2xl font-bold text-blue-800">Queue</h2>
+      </div>
+      <div className="flex gap-4">
+        <button
+          className="text-blue-800 font-bold text-5xl"
+          onClick={prev}
+          disabled={currentIndex === 0}
+        >
+          &lt;
+        </button>
+        {visibleCards.map((card, index) => (
+          <Queslot key={card.mediaCardId} card={card} />
+        ))}
+        <button
+          className="text-blue-800 font-bold text-5xl"
+          onClick={next}
+          disabled={currentIndex >= cards.length - 3}
+        >
+          &gt;
+        </button>
+      </div>
     </div>
   );
 };
