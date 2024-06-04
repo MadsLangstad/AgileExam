@@ -49,7 +49,7 @@ const Queue: React.FC = () => {
         >
           &lt;
         </button>
-        {visibleCards.map((card, index) => (
+        {visibleCards.map((card) => (
           <Queslot key={card.mediaCardId} card={card} />
         ))}
         <button
