@@ -24,7 +24,7 @@ const Queue: React.FC<QueueProps> = ({ cards }) => {
   const visibleCards = cards.slice(currentIndex, currentIndex + 3);
 
   return (
-    <div className="queue flex h-full w-full justify-center items-center gap-4">
+    <div className="queue flex h-full w-full justify-center items-center gap-4 bg-dark">
       <button
         className="text-blue-800 font-bold text-5xl"
         onClick={prev}

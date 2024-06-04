@@ -54,12 +54,11 @@ const DashBoardPage = () => {
     <>
       <Navbar />
       <div className={"h-screen p-2 bg-gray-100"}>
-        <div className={"mb-2"}></div>
-        <div className={"grid grid-cols-1 md:grid-cols-2 gap-2 h-full"}>
-          <div className={" p-4 rounded-lg  flex flex-col"}>
-            <p className={"text-xl text-blue-800 font-semibold mb-4"}>
+        <div className={"grid grid-cols-1 md:grid-cols-6 gap-2"}>
+          <div className={"p-2 rounded-lg flex flex-col col-span-2"}>
+            <h2 className="text-2xl font-bold text-blue-800">
               Now showing on screen
-            </p>
+            </h2>
             <button
               className={"w-full h-auto"}
               onClick={handleNowShowingClick}
@@ -72,20 +71,22 @@ const DashBoardPage = () => {
               <span>"Name Name" {currentDate}</span>
             </div>
           </div>
-          <div className={"bg-white p-2 flex flex-col rounded-lg shadow"}>
-            <p className={"text-xl text-blue-800 font-semibold mb-4"}>Queue</p>
+          <div className={" p-2 flex flex-col col-span-4"}>
+            <h2 className="text-2xl font-bold text-blue-800">Queue</h2>
             <Queue cards={cards} />
           </div>
-          <div className="bg-white p-4 rounded-lg shadow flex flex-col items-center justify center">
+          <div className="flex flex-col col-span-2 items-center justify-items-start h-auto">
             <AddPost />
           </div>
-          <div className="bg-white p-4 rounded-lg shadow flex flex-col items-center justify-center">
+          <div className="bg-white p-4 rounded-lg shadow flex flex-col col-span-4 ">
             <AnnouncementComponent />
-            <div className={"flex mt-4 space-x-2"}>
+            {/**
+            <div className={"flex mt-4 space-x-2 items-center justify-end"}>
               <button className={"w-8 h-8 bg-blue-500 rounded-full"}></button>
               <button className={"w-8 h-8 bg-green-500 rounded-full"}></button>
               <button className={"w-8 h-8 bg-purple-500 rounded-full"}></button>
             </div>
+             */}
           </div>
         </div>
       </div>
