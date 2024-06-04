@@ -44,7 +44,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("AgileExam.Models.History", b =>
                 {
-                    b.Property<int?>("HistoryId")
+                    b.Property<int>("HistoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -54,7 +54,7 @@ namespace Api.Migrations
                     b.Property<string>("EndDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("QueueId")
+                    b.Property<int>("QueueId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("StartDate")
@@ -73,6 +73,12 @@ namespace Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FileType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UploadDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
@@ -88,7 +94,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("AgileExam.Models.Queue", b =>
                 {
-                    b.Property<int?>("QueueId")
+                    b.Property<int>("QueueId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -101,13 +107,13 @@ namespace Api.Migrations
                     b.Property<int?>("Duration")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("MediaCardId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("QueueId");
@@ -153,7 +159,9 @@ namespace Api.Migrations
                 {
                     b.HasOne("AgileExam.Models.Queue", "Queue")
                         .WithMany("Histories")
-                        .HasForeignKey("QueueId");
+                        .HasForeignKey("QueueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Queue");
                 });
@@ -173,11 +181,13 @@ namespace Api.Migrations
                 {
                     b.HasOne("AgileExam.Models.BirthdayCard", "BirthdayCard")
                         .WithOne()
-                        .HasForeignKey("AgileExam.Models.Queue", "BirthdayCardId");
+                        .HasForeignKey("AgileExam.Models.Queue", "BirthdayCardId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("AgileExam.Models.MediaCard", "MediaCard")
                         .WithOne()
-                        .HasForeignKey("AgileExam.Models.Queue", "MediaCardId");
+                        .HasForeignKey("AgileExam.Models.Queue", "MediaCardId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("BirthdayCard");
 

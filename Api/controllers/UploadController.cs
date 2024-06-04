@@ -58,9 +58,23 @@ namespace Api.Controllers
                 FileType = file.ContentType,
                 UploadDate = DateTime.UtcNow
             };
-
-            _context.MediaCards.Add(mediaCard);
+            
+            _context.MediaCards.Add(mediaCard);         
             await _context.SaveChangesAsync();
+
+            var queueItem = new Queue
+            {  
+               MediaCardId = mediaCard.MediaCardId,
+               CardType = "media",
+               Duration = 600,
+               StartDate = DateTime.UtcNow,
+               EndDate = DateTime.UtcNow.AddSeconds(86400),
+            };
+
+            _context.Queue.Add(queueItem);
+            await _context.SaveChangesAsync();
+
+
 
             return Ok(new { filePath = fileUrl });
         }
