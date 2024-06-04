@@ -1,18 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import CardPage from "./CardPage";
 import AddPost from "../components/dashboard/AddPost";
 import AnnouncementComponent from "../components/dashboard/AnnouncementComponent";
 import Navbar from "../components/dashboard/Navbar";
 import Queue from "../components/dashboard/queue/Queue";
-import { useRef } from 'react';
+import { useRef, useState } from "react";
+import NowShowing from "../components/dashboard/NowShowing";
+import ViewScreen from "../components/ViewScreen";
 
 const DashBoardPage = () => {
-  const navigate = useNavigate();
   const targetRef = useRef<HTMLDivElement>(null);
-
-  const handleNowShowingClick = () => {
-    navigate("/now-showing");
-  };
+  const [currentImage, setCurrentImage] = useState<string>("");
 
   return (
     <div>
@@ -22,14 +18,7 @@ const DashBoardPage = () => {
       <div className="relative">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen">
           <div className="bg-slate-300">
-            <p>Now showing</p>
-            <button
-              className="w-120 h-auto"
-              onClick={handleNowShowingClick}
-              style={{ border: "none", padding: 0, background: "none" }}
-            >
-              <CardPage targetRef={targetRef} />
-            </button>
+            <NowShowing currentImage={currentImage} />
           </div>
           <div className="bg-slate-300">
             <Queue />
@@ -41,6 +30,9 @@ const DashBoardPage = () => {
             <AnnouncementComponent targetRef={targetRef} />
           </div>
         </div>
+      </div>
+      <div style={{ display: "none" }}>
+        <ViewScreen onImageChange={setCurrentImage} />
       </div>
     </div>
   );
