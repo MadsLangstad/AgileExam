@@ -1,12 +1,15 @@
 export interface MediaCardProps {
   type: "media";
+  mediaCardId: number;
   title: string;
-  image: string;
+  imgUrl: string;
 }
+
 export interface BirthdayCardProps {
+  mediaCardId: number;
   type: "birthday";
   title: string;
-  image: string;
+  imgUrl: string;
   text: string;
 }
 
