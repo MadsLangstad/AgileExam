@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-blue-600 border-b-4 border-teal-400">
+    <nav className="bg-blue-600 border-b-4 fixed top-0 z-10 w-full border-teal-400">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* Logo on the left */}
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
                 Welcome [name] !
                 <img src="/user.png" alt="KPMG Logo" className="h-6 w-6 ml-3" />
                 {isOpen && (
-                  <div className="absolute right-0 mt-40 w-44 bg-white shadow-lg z-2">
+                  <div className="absolute right-0 mt-40 w-44 bg-white shadow-lg z-20">
                     <div className="relative">
                       <div className="absolute -top-1 right-20 transform rotate-45 w-3 h-3 bg-white border-teal-400"></div>
                       <div className="border-t border-teal-400"></div>
