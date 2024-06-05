@@ -19,21 +19,51 @@ const AddPost = () => {
         <h1 className=" text-2xl font-bold text-blue-800">Add To Queue</h1>
         <div className="bg-blue-800 text-white rounded-full w-8 h-8 bg-[url('/tooltip_icon.svg')] bg-contain bg-no-repeat bg-center"></div>
       </div>
-      <div className="flex justify-center items-center gap-4">
-        <div>
+      <div className="flex flex-col gap-4 items-center w-full">
+        {/* Image or video */}
+        <div className={"w-96 bg-white border border-gray-300 rounded-md"}>
           <button
-            className="h-20 w-20 rounded-md bg-[url('/img_video_icon.svg')] bg-contain bg-no-repeat bg-center"
+            className="flex items-center h-20 w-full rounded-md"
             onClick={handleButtonClick}
-          ></button>
-          <div className="text-center">
-            <p className="text-sm text-gray-500">Add Image/Video</p>
-          </div>
+          >
+            <div
+              className={
+                "flex-none h-12 w-12 bg-[url('/videoIcon.svg')] bg-contain bg-no-repeat bg-center ml-4"
+              }
+            ></div>
+            <p
+              className={
+                "flex-grow mr-8 text-center text-blue-800 text-blue-800 text-lg font-medium"
+              }
+            >
+              Image or video
+            </p>
+          </button>
         </div>
-        <div>
-          <button className="h-20 w-20 rounded-md bg-[url('/birthday_icon.svg')] bg-contain bg-no-repeat bg-center"></button>
-          <div className="text-center">
-            <p className="text-sm text-gray-500">Add Birthday Post</p>
-          </div>
+
+        {/* Birthday */}
+        <div
+          className={
+            "w-full max-w-lg bg-white border border-gray-300 rounded-md"
+          }
+        >
+          <button
+            className="flex items-center h-20 w-full rounded-md"
+            onClick={handleButtonClick}
+          >
+            <div
+              className={
+                "flex-none h-12 w-12 bg-[url('/birthdayIcon.svg')] bg-contain bg-no-repeat bg-center ml-4"
+              }
+            ></div>
+            <p
+              className={
+                "flex-grow mr-8 text-center text-blue-800 text-blue-800 text-lg font-medium"
+              }
+            >
+              Image or video
+            </p>
+          </button>
         </div>
       </div>
     </div>
