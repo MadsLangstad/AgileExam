@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { CardProps } from "./type";
 import Queslot from "./Queslot";
-import MediaCardService from "../../../services/MediaCardService";
+import QueueService from "../../../services/QueueService";
+import { IQueue } from "../../../interfaces/IQueue";
 
 const Queue: React.FC = () => {
   const [cards, setCards] = useState<CardProps[]>([]);
@@ -9,16 +10,30 @@ const Queue: React.FC = () => {
 
   useEffect(() => {
     const fetchCards = async () => {
-      const data = await MediaCardService.getAllMediaCards();
-      console.log("Fetched data:", data);
-      const formattedData: CardProps[] = data.map((item: any) => ({
-        type: "media",
-        mediaCardId: item.mediaCardId,
-        title: item.url,
-        imgUrl: item.url,
-      }));
-      setCards(formattedData);
+      const queueData = await QueueService.getAllQueues();
+      console.log("Fetched queue data:", queueData);
+
+      const formattedData: CardProps[] = await Promise.all(
+        queueData.map(async (queueItem: IQueue) => {
+          if (queueItem.mediaCardId) {
+            const mediaCard = await QueueService.getMediaCardById(
+              queueItem.mediaCardId
+            );
+            return {
+              type: "media",
+              queueId: queueItem.queueId,
+              title: mediaCard.url,
+              imgUrl: mediaCard.url,
+            };
+          } else {
+            return null;
+          }
+        })
+      );
+
+      setCards(formattedData.filter((item) => item !== null));
     };
+
     fetchCards();
   }, []);
 
