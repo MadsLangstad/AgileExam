@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface AddBirthdayCardModalProps {
   isVisible: boolean;
@@ -10,6 +11,9 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({ isVisible, 
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [bodyText, setBodyText] = useState('');
   const [background, setBackground] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+
 
   useEffect(() => {
     if (isVisible) {
@@ -35,14 +39,34 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({ isVisible, 
     'bg-teal-500',
   ];
 
-  const handleAddToQueue = () => {
-    console.log({
+  const handleAddToQueue = async () => {
+    const newCard = {
       title,
-      date,
-      bodyText,
-      background,
-    });
-    onClose();
+      content: bodyText,
+      imageUrl: isColorBackground ? null : background,
+      userId: 1,
+    };
+
+    try {
+      await axios.post('http://localhost:5017/api/upload/addBirthdayCard', newCard);
+        setIsSuccess(true);
+        setStatusMessage('Birthday card added successfully');
+        // Clear all fields and reset background
+        setTitle('');
+        setDate(new Date().toISOString().slice(0, 10));
+        setBodyText('');
+        setBackground('');
+        setTimeout(() => {
+          setStatusMessage('');
+        }, 3000);
+    } catch (error) {
+        console.error("Error adding birthday card: ", error);
+        setIsSuccess(false);
+        setStatusMessage('Error adding birthday card');
+        setTimeout(() => {
+          setStatusMessage('');
+        }, 3000);
+    }
   };
 
   const isColorBackground = background.startsWith('bg-');
@@ -52,7 +76,7 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({ isVisible, 
   return (
     <div className="fixed inset-0 top-17 flex justify-center items-center z-10 bg-gray-800 bg-opacity-50">
       <div className="bg-white p-8 shadow-lg w-full h-full-minus-4.25rem flex flex-col md:flex-row overflow-hidden md:rounded-none relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">&times;</button>
+        <button onClick={onClose} className="absolute top-4 right-4 text-blue-800 text-4xl">&times;</button>
         <h2 className="absolute top-24 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-center text-blue-800">Quick Add Birthday Card</h2>
         <div className="flex flex-col md:flex-row w-full h-full items-center justify-center mt-16">
           <div className="w-full md:w-1/2 p-4 flex flex-col items-center">
@@ -121,6 +145,9 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({ isVisible, 
                 >
                   Add To Queue
                 </button>
+              </div>
+              <div className={`w-full mt-8 text-center ${isSuccess === null ? '' : isSuccess ? 'text-green-500' : 'text-red-500'}`}>
+                {statusMessage}
               </div>
             </div>
           </div>
