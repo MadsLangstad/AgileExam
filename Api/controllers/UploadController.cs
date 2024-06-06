@@ -78,5 +78,19 @@ namespace Api.Controllers
 
             return Ok(new { filePath = fileUrl });
         }
+
+        [HttpPost("addBirthdayCard")]
+        public async Task<IActionResult> AddBirthdayCard([FromBody] BirthdayCard birthdayCard)
+        {
+            if (birthdayCard == null || string.IsNullOrWhiteSpace(birthdayCard.Title) || string.IsNullOrWhiteSpace(birthdayCard.Content))
+            {
+                return BadRequest(new { message = "Invalid birthday card data." });
+            }
+
+            _context.BirthdayCards.Add(birthdayCard);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Birthday card added successfully." });
+        }
     }
 }
