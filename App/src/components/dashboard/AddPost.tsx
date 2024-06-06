@@ -44,24 +44,24 @@ const AddPost = () => {
             ></div>
             <p
               className={
-                "flex-grow mr-8 text-center text-blue-800 text-blue-800 text-lg font-medium"
+                "flex-grow mr-8 text-center text-blue-800 text-lg font-medium"
               }
             >
               Image or video
             </p>
           </button>
         </div>
-        <div>
+        <div className={"w-96 bg-white border border-gray-300 rounded-md"}>
           <button
-            className="h-20 w-20 rounded-md bg-[url('/birthday_icon.svg')] bg-contain bg-no-repeat bg-center"
+            className="flex items-center h-20 w-full rounded-md"
             onClick={handleBirthdayButtonClick}
-          ></button>
-          <div className="text-center">
-            <p className="text-sm text-gray-500">Add Birthday Post</p>
+          >
+          <div className="flex-none h-12 w-12 bg-[url('/videoIcon.svg')] bg-contain bg-no-repeat bg-center ml-4"></div>
+            <p className="flex-grow mr-8 text-center text-blue-800 text-lg font-medium">Add Birthday Post</p>
+            </button>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
