@@ -9,7 +9,6 @@ const QueueService = (() => {
   const getAllQueues = async () => {
     try {
       const result = await axios.get(apiEndpoints.Queue);
-      console.log(result.data);
       return result.data;
     } catch (error) {
       console.error("Error in getting all queues", error);

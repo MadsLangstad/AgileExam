@@ -23,7 +23,7 @@ const DashBoardPage = () => {
           <div className="bg-slate-300">
             <Queue />
           </div>
-          <div className="bg-slate-300 flex items-center justify-center">
+          <div className=" flex items-center justify-center">
             <AddPost />
           </div>
           <div className="bg-slate-300 flex items-center justify-center">

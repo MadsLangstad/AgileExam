@@ -5,6 +5,7 @@ import { WeatherCardProvider } from "../contexts/WeatherCardContext.tsx";
 import { MediaCardProvider } from "../contexts/MediaCardContext.tsx";
 import { BirthdayCardProvider } from "../contexts/BirthdayCardContext.tsx";
 import FullScreenPage from "../pages/FullScreenPage.tsx";
+import HistoryPage from "../pages/HistoryPage.tsx";
 
 const RoutingMain = () => {
   return (
@@ -18,6 +19,7 @@ const RoutingMain = () => {
                 <Route path="/" element={<LogInPage />}></Route>
                 <Route path="dashboard" element={<DashBoardPage />}></Route>
                 <Route path="fullscreen" element={<FullScreenPage />}></Route>
+                <Route path="history" element={<HistoryPage />}></Route>
               </Routes>
             </BirthdayCardProvider>
           </MediaCardProvider>

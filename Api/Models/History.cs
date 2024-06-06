@@ -7,6 +7,5 @@ namespace AgileExam.Models
         public Queue? Queue { get; set; }
         public string? StartDate { get; set; }
         public string? EndDate { get; set; }
-        public int? Duration { get; set; }
     }
 }
