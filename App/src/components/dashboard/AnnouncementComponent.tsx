@@ -5,7 +5,9 @@ interface AnnouncementComponentProps {
   targetRef: React.RefObject<HTMLDivElement>;
 }
 
-const AnnouncementComponent: React.FC<AnnouncementComponentProps> = ({ targetRef }) => {
+const AnnouncementComponent: React.FC<AnnouncementComponentProps> = ({
+  targetRef,
+}) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [announcement, setAnnouncement] = useState<string>("");
   const [duration, setDuration] = useState<number>(1); // Default duration in minutes
@@ -36,14 +38,14 @@ const AnnouncementComponent: React.FC<AnnouncementComponentProps> = ({ targetRef
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl">
-      <AnnouncementModal 
-        isVisible={isModalVisible} 
-        announcement={announcement} 
+    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg w-full max-w-3xl">
+      <AnnouncementModal
+        isVisible={isModalVisible}
+        announcement={announcement}
         backgroundColor={backgroundColor}
-        targetRef={targetRef} 
+        targetRef={targetRef}
       />
-      <div className="w-full flex justify-between items-start">
+      <div className="flex gap-4 justify-center items-center mb-4">
         <div className="flex-1 mr-4">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">
             Make an announcement
@@ -77,7 +79,9 @@ const AnnouncementComponent: React.FC<AnnouncementComponentProps> = ({ targetRef
           </div>
         </div>
         <div className="w-1/3 flex flex-col items-center mt-6">
-          <h3 className="text-sm text-gray-500 mb-2">CHOOSE BACKGROUND COLOR</h3>
+          <h3 className="text-sm text-gray-500 mb-2">
+            CHOOSE BACKGROUND COLOR
+          </h3>
           <div className="grid grid-cols-3 gap-4">
             {colors.map((color) => (
               <div

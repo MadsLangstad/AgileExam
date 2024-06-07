@@ -26,7 +26,7 @@ const DashBoardPage = () => {
           <div className=" flex items-center justify-center">
             <AddPost />
           </div>
-          <div className="bg-slate-300 flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <AnnouncementComponent targetRef={targetRef} />
           </div>
         </div>
