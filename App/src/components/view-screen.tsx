@@ -1,15 +1,6 @@
 import { useState, useEffect } from "react";
 import QueueService from "../services/app-service";
-
-interface IQueue {
-  queueId: number;
-  cardType: string;
-  birthDayCardId: number;
-  mediaCardId: number;
-  startDate: Date;
-  endDate: Date;
-  duration: number;
-}
+import { QueueProps } from "./type";
 
 const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
   onImageChange,
@@ -26,7 +17,7 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
         console.log("Fetched queue data:", queueData);
 
         const formattedData = await Promise.all(
-          queueData.map(async (queueItem: IQueue) => {
+          queueData.map(async (queueItem: QueueProps) => {
             if (queueItem.mediaCardId) {
               const mediaCard = await QueueService.getMediaCardById(
                 queueItem.mediaCardId

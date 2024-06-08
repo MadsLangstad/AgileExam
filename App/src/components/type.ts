@@ -13,7 +13,7 @@ export interface BirthdayCardProps {
   text: string;
 }
 
-export interface IQueue {
+export interface QueueProps {
   queueId: number;
   cardType: string;
   birthDayCardId: number;
@@ -23,7 +23,7 @@ export interface IQueue {
   duration: number;
 }
 
-export interface IHistory {
+export interface HistoryProps {
   historyId: number;
   queueId: number;
   startDate: Date;
