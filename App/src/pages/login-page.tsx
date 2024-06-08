@@ -6,8 +6,6 @@ const LogInPage = () => {
   const navigate = useNavigate();
 
   const handleSignIn = () => {
-    // Logic for handling sign-in can be added here
-    // For now, we'll just navigate to the dashboard, needs further development to handel username and password
     navigate("/dashboard");
   };
 

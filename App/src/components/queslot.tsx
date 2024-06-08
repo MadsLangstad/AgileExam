@@ -1,5 +1,5 @@
-import MediaCard from "./MediaCard";
-import BirthdayCard from "./BirthdayCard";
+import BirthdayCard from "./birthday-card";
+import MediaCard from "./media-card";
 import { CardProps } from "./type";
 
 interface QueslotProps {

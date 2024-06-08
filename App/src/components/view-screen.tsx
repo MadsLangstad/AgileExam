@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
-import QueueService from "../services/QueueService";
-import { IQueue } from "../interfaces/IQueue";
+import QueueService from "../services/app-service";
+
+interface IQueue {
+  queueId: number;
+  cardType: string;
+  birthDayCardId: number;
+  mediaCardId: number;
+  startDate: Date;
+  endDate: Date;
+  duration: number;
+}
 
 const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
   onImageChange,

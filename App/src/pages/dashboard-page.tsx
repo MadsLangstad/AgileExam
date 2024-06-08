@@ -1,13 +1,11 @@
-import AddPost from "../components/dashboard/AddPost";
-import AnnouncementComponent from "../components/dashboard/AnnouncementComponent";
-import Navbar from "../components/dashboard/Navbar";
-import Queue from "../components/dashboard/queue/Queue";
-import { useRef, useState } from "react";
-import NowShowing from "../components/dashboard/NowShowing";
-import ViewScreen from "../components/ViewScreen";
+import AddPost from "../components/add-post";
+import Navbar from "../components/navbar";
+import { useState } from "react";
+import NowShowing from "../components/now-showing";
+import ViewScreen from "../components/view-screen";
+import Queue from "../components/queue";
 
 const DashBoardPage = () => {
-  const targetRef = useRef<HTMLDivElement>(null);
   const [currentImage, setCurrentImage] = useState<string>("");
 
   return (
@@ -26,9 +24,7 @@ const DashBoardPage = () => {
           <div className=" flex items-center justify-center">
             <AddPost />
           </div>
-          <div className="flex items-center justify-center">
-            <AnnouncementComponent targetRef={targetRef} />
-          </div>
+          <div className="flex items-center justify-center"></div>
         </div>
       </div>
       <div style={{ display: "none" }}>

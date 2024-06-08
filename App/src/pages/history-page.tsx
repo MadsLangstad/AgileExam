@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import HistoryService from "../services/HistoryService";
-import { IHistory } from "../interfaces/IHistory";
-import HistoryCard from "../components/HistoryCard";
-import Navbar from "../components/dashboard/Navbar";
+import HistoryCard from "../components/history-card";
+import Navbar from "../components/navbar";
+import { HistoryProps } from "../components/type";
+import AppService from "../services/app-service";
 
 const HistoryPage: React.FC = () => {
-  const [histories, setHistories] = useState<IHistory[]>([]);
+  const [histories, setHistories] = useState<HistoryProps[]>([]);
 
   useEffect(() => {
     const fetchHistories = async () => {
-      const data = await HistoryService.getAllHistories();
+      const data = await AppService.getAllHistories();
       setHistories(data);
     };
 

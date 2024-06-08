@@ -1,6 +1,11 @@
-import UploadButton from "../upload/UploadButton";
+import UploadButton from "./upload-button";
 
-const uploadModal = ({ isVisible, onClose }) => {
+interface UploadModalProps {
+  isVisible: boolean;
+  onClose: () => void;
+}
+
+const uploadModal: React.FC<UploadModalProps> = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (

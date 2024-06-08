@@ -1,4 +1,4 @@
-import RoutingMain from "./routing/RoutingMain.tsx";
+import RoutingMain from "./routing/routing-main.tsx";
 
 function App() {
   return (

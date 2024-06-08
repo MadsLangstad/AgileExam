@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ViewScreen from "../components/ViewScreen";
-import NowShowing from "../components/dashboard/NowShowing";
+import ViewScreen from "../components/view-screen";
+import NowShowing from "../components/now-showing";
 
 const FullScreenPage: React.FC = () => {
   const [currentImage, setCurrentImage] = useState<string>("");

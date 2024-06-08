@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AnnouncementModal from "./AnnouncementModal";
+import AnnouncementModal from "./announcement-modal";
 
 interface AnnouncementComponentProps {
   targetRef: React.RefObject<HTMLDivElement>;
