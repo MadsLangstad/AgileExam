@@ -10,6 +10,7 @@ namespace AgileExam.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<BirthdayCard> BirthdayCards { get; set; }
         public DbSet<MediaCard> MediaCards { get; set; }
+        public DbSet<EventCard> EventCards { get; set; }
         public DbSet<Queue> Queue { get; set; }
         public DbSet<History> Histories { get; set; }
 
@@ -38,6 +39,12 @@ namespace AgileExam.Contexts
                 .WithOne()
                 .HasForeignKey<Queue>(q => q.MediaCardId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Queue>()
+                .HasOne(q => q.EventCard)
+                .WithMany()
+                .HasForeignKey(q => q.EventCardId)
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<Queue>()
                 .HasMany(q => q.Histories)
