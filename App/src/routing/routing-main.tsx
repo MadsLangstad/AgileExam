@@ -1,8 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DashBoardPage from "../pages/dashboard-page.tsx";
-import { LogInPage } from "../pages/index.tsx";
-import FullScreenPage from "../pages/fullscreen-page.tsx";
-import HistoryPage from "../pages/history-page.tsx";
+import { LogInPage, HistoryPage, FullScreenPage, DashboardPage } from "../pages/index.tsx";
 
 const RoutingMain = () => {
   return (
@@ -11,7 +8,7 @@ const RoutingMain = () => {
       <main>
         <Routes>
           <Route path="/" element={<LogInPage />}></Route>
-          <Route path="dashboard" element={<DashBoardPage />}></Route>
+          <Route path="dashboard" element={<DashboardPage />}></Route>
           <Route path="fullscreen" element={<FullScreenPage />}></Route>
           <Route path="history" element={<HistoryPage />}></Route>
         </Routes>
