@@ -66,7 +66,7 @@ namespace Api.Controllers
             {  
                MediaCardId = mediaCard.MediaCardId,
                CardType = "media",
-               Duration = 600,
+               DurationMinutes = 6,
                StartDate = DateTime.UtcNow,
                EndDate = DateTime.UtcNow.AddSeconds(86400),
             };
