@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { CardProps } from "./type";
-import Queslot from "./Queslot";
-import QueueService from "../../../services/QueueService";
-import { IQueue } from "../../../interfaces/IQueue";
+import Queslot from "./queslot";
+import QueueService from "../services/app-service";
+import { QueueProps } from "./type";
 
 const Queue: React.FC = () => {
   const [cards, setCards] = useState<CardProps[]>([]);
@@ -14,7 +14,7 @@ const Queue: React.FC = () => {
       console.log("Fetched queue data:", queueData);
 
       const formattedData: CardProps[] = await Promise.all(
-        queueData.map(async (queueItem: IQueue) => {
+        queueData.map(async (queueItem: QueueProps) => {
           if (queueItem.mediaCardId) {
             const mediaCard = await QueueService.getMediaCardById(
               queueItem.mediaCardId

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { IHistory } from "../interfaces/IHistory";
-import QueueService from "../services/QueueService";
-import { IQueue } from "../interfaces/IQueue";
+import { HistoryProps } from "./type";
+import QueueService from "../services/app-service";
+import { QueueProps } from "./type";
 
 interface HistoryCardProps {
-  history: IHistory;
+  history: HistoryProps;
 }
 
 const HistoryCard: React.FC<HistoryCardProps> = ({ history }) => {
@@ -14,7 +14,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ history }) => {
     const fetchMediaCard = async () => {
       const queue = await QueueService.getAllQueues();
       const queueItem = queue.find(
-        (q: IQueue) => q.queueId === history.queueId
+        (q: QueueProps) => q.queueId === history.queueId
       );
 
       if (queueItem && queueItem.mediaCardId) {

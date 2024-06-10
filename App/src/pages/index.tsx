@@ -1,5 +1,5 @@
-import LogInPage from "./LogInPage.tsx";
-import DashboardPage from "./DashboardPage.tsx";
-import HistoryPage from "./HistoryPage.tsx";
+import LogInPage from "./login-page.tsx";
+import DashboardPage from "./dashboard-page.tsx";
+import HistoryPage from "./history-page.tsx";
 
 export { LogInPage, DashboardPage, HistoryPage };

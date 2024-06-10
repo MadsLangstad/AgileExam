@@ -1,6 +1,6 @@
 import { useState } from "react";
-import UploadModal from "./UploadModal";
-import AddBirthdayCardModal from "./AddBirthdayCardModal";
+import UploadModal from "./upload-modal";
+import AddBirthdayCardModal from "./add-birthday-card-modal";
 
 const AddPost = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -12,7 +12,7 @@ const AddPost = () => {
 
   const handleBirthdayButtonClick = () => {
     setBirthdayModalVisible(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setModalVisible(false);
@@ -20,12 +20,15 @@ const AddPost = () => {
 
   const handleCloseBirthdayModal = () => {
     setBirthdayModalVisible(false);
-  }
+  };
 
   return (
     <div className="p-6">
       <UploadModal isVisible={isModalVisible} onClose={handleCloseModal} />
-      <AddBirthdayCardModal isVisible={isBirthdayModalVisible} onClose={handleCloseBirthdayModal} />
+      <AddBirthdayCardModal
+        isVisible={isBirthdayModalVisible}
+        onClose={handleCloseBirthdayModal}
+      />
       <div className="flex gap-4 justify-center items-center mb-4">
         <h1 className=" text-2xl font-bold text-blue-800">Add To Queue</h1>
         <div className="bg-blue-800 text-white rounded-full w-8 h-8 bg-[url('/tooltip_icon.svg')] bg-contain bg-no-repeat bg-center"></div>
@@ -56,12 +59,14 @@ const AddPost = () => {
             className="flex items-center h-20 w-full rounded-md"
             onClick={handleBirthdayButtonClick}
           >
-          <div className="flex-none h-12 w-12 bg-[url('/videoIcon.svg')] bg-contain bg-no-repeat bg-center ml-4"></div>
-            <p className="flex-grow mr-8 text-center text-blue-800 text-lg font-medium">Add Birthday Post</p>
-            </button>
-          </div>
+            <div className="flex-none h-12 w-12 bg-[url('/videoIcon.svg')] bg-contain bg-no-repeat bg-center ml-4"></div>
+            <p className="flex-grow mr-8 text-center text-blue-800 text-lg font-medium">
+              Add Birthday Post
+            </p>
+          </button>
         </div>
       </div>
+    </div>
   );
 };
 

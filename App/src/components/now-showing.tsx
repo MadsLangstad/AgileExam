@@ -5,8 +5,6 @@ const NowShowing: React.FC<{ currentImage: string }> = ({ currentImage }) => {
   const navigate = useNavigate();
 
   const navigateToFullScreen = () => {
-    // Logic for handling sign-in can be added here
-    // For now, we'll just navigate to the dashboard, needs further development to handel username and password
     navigate("/fullscreen");
   };
 
