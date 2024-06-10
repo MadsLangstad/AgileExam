@@ -19,7 +19,7 @@ const HistoryPage: React.FC = () => {
   return (
     <div className="w-full h-screen relative bg-slate-50">
       <Navbar />
-      <h1 className="flex justify-center text-3xl text-blue-800 font-bold mt-10 pb-16">
+      <h1 className="flex justify-center text-3xl text-blue-800 font-bold mt-10 pb-16 pt-10">
         History
       </h1>
       <div className="flex justify-center items-center">
