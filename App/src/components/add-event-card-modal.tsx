@@ -47,7 +47,22 @@ const AddEventCardModal: React.FC<AddEventCardModalProps> = ({ isVisible, onClos
     };
 
     try {
-      await axios.post('http://localhost:5017/api/EventCard', newCard);
+      const cardResponse = await axios.post('http://localhost:5017/api/EventCard', newCard);
+
+      const eventCardId = cardResponse.data.eventCardId;
+      console.log('Added event card:', cardResponse.data);
+
+      const newQueueItem = {
+        cardType: 'event',
+        eventCardId,
+        startDate: date,
+        endDate: date,
+        durationMinutes: duration,
+        durationHours: 0,
+      };
+
+      await axios.post('http://localhost:5017/api/Queue', newQueueItem);
+
       setIsSuccess(true);
       setStatusMessage('Event card added successfully');
       setTitle('');
@@ -57,6 +72,7 @@ const AddEventCardModal: React.FC<AddEventCardModalProps> = ({ isVisible, onClos
       setLocation('');
       setDescription('');
       setTimeout(() => setStatusMessage(''), 3000);
+
     } catch (error) {
       console.error("Error adding event card: ", error);
       setIsSuccess(false);
@@ -103,7 +119,7 @@ const AddEventCardModal: React.FC<AddEventCardModalProps> = ({ isVisible, onClos
               />
             </div>
             <div className="mb-6 w-full">
-              <label className="block text-lg font-medium text-blue-800 mb-2">Duration (minutes)</label>
+              <label className="block text-lg font-medium text-blue-800 mb-2">Duration (hours)</label>
               <input
                 type="number"
                 value={duration !== null ? duration : ''}
