@@ -41,7 +41,7 @@ namespace AgileExam.Controllers
             _context.EventCards.Add(newCard);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Event card added successfully." });
+            return Ok(new { eventCardId = newCard.EventCardId, message = "Event card added successfully." });
         }
 
         [HttpPut("{id}")]

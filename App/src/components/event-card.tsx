@@ -11,15 +11,32 @@ const NewEventCard: React.FC<EventCardProps> = ({
   time,
   duration,
 }) => {
+
+  const formattedTime = new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   return (
-    <div className="event flex justify-center items-center h-full w-full bg-yellow-400 rounded-md hover:scale-110 transition-all duration-300">
-      <div className="flex-1 p-4">
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <p>{location}</p>
-        <p>{date}</p>
-        <p>{time.toLocaleTimeString()}</p>
-        <p>{duration} minutes</p>
+    <div className="event flex justify-center items-center h-full w-full bg-white border border-blue-700 rounded-md p-6">
+      <div className="flex-1 text-left">
+        <div className="flex items-center mb-4">
+          <h2 className="text-3xl font-bold text-blue-700 mr-4">{title}</h2>
+          <img src="/public/KPMG_logo_blue.png" alt="KPMG Logo" className="h-10" />
+        </div>
+        <div className="flex items-center mb-2">
+          <img src="/public/location.png" alt="" />
+          <p className="pl-2 text-xl font-semibold text-blue-700">{location}</p>
+        </div>
+        <div className="flex items-center mb-2">
+          <img src="/public/bx_party.png" alt="" />
+          <p className="pl-2 text-xl font-semibold text-blue-700">{date}</p>
+        </div>
+        <div className="flex items-center mb-2">
+          <img src="/public/carbon_time.png" alt="" />
+          <p className="pl-2 text-xl font-semibold text-blue-700">{formattedTime} | {duration} Hours</p>
+        </div>
+        <div className="border-t border-2 border-blue-700 w-5/6"></div>
+        <div className="mt-4 pt-4">
+          <p className="pl-2 text-xl font-semibold text-blue-700">{description}</p>
+        </div>
       </div>
     </div>
   );
