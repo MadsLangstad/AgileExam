@@ -1,15 +1,15 @@
 import { useState } from "react";
-import UploadModal from "./upload-modal";
 import AddBirthdayCardModal from "./add-birthday-card-modal";
 import AddEventCardModal from "./add-event-card-modal";
+import AddMediaCardModal from './add-media-card-modal';
 
 const AddPost = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isMediaModalVisible, setMediaModalVisible] = useState(false);
   const [isBirthdayModalVisible, setBirthdayModalVisible] = useState(false);
   const [isEventModalVisible, setEventModalVisible] = useState(false);
 
-  const handleButtonClick = () => {
-    setModalVisible(true);
+  const handleMediaButtonClick = () => {
+    setMediaModalVisible(true);
   };
 
   const handleBirthdayButtonClick = () => {
@@ -20,8 +20,8 @@ const AddPost = () => {
     setEventModalVisible(true);
   };
 
-  const handleCloseModal = () => {
-    setModalVisible(false);
+  const handleCloseMediaModal = () => {
+    setMediaModalVisible(false);
   };
 
   const handleCloseBirthdayModal = () => {
@@ -34,7 +34,10 @@ const AddPost = () => {
 
   return (
       <div className="p-6">
-        <UploadModal isVisible={isModalVisible} onClose={handleCloseModal} />
+        <AddMediaCardModal
+            isVisible={isMediaModalVisible}
+            onClose={handleCloseMediaModal}
+        />
         <AddBirthdayCardModal
             isVisible={isBirthdayModalVisible}
             onClose={handleCloseBirthdayModal}
@@ -46,7 +49,7 @@ const AddPost = () => {
         <h1 className="text-2xl font-bold text-blue-800 gap-2 p-1 text-center">Add Card To Queue</h1>
         <div className="grid grid-cols-3 gap-4">
           {/* Image or video */}
-          <div onClick={handleButtonClick} className="w-30vw" style={{ height: '30vh' }}>
+          <div onClick={handleMediaButtonClick} className="w-30vw" style={{ height: '30vh' }}>
             <div className="h-full p-4 border-4 rounded bg-[url('/Image.svg')]" style={{ backgroundImage: 'url(http://localhost:5173/Image.svg)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}></div>
           </div>
           {/* Add Birthday Post */}

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgileExam.Contexts;
 using AgileExam.Models;
-using System;
 
 namespace AgileExam.Controllers
 {
@@ -32,31 +31,17 @@ namespace AgileExam.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<EventCard>> Post(EventCard card)
+        public async Task<IActionResult> AddEventCard([FromBody] EventCard newCard)
         {
-            // Validate the card
-            if (card == null || string.IsNullOrEmpty(card.Title))
+            if (newCard == null || string.IsNullOrWhiteSpace(newCard.Title) || string.IsNullOrWhiteSpace(newCard.Location) || string.IsNullOrWhiteSpace(newCard.Description) || newCard.Duration <= 0)
             {
-                return BadRequest("Invalid event card data.");
+                return BadRequest(new { message = "All fields are required and duration must be greater than 0." });
             }
 
-            try
-            {
-                _context.EventCards.Add(card);
-                await _context.SaveChangesAsync();
-                return CreatedAtAction(nameof(Get), new { id = card.EventCardId }, card);
-            }
-            catch (DbUpdateException ex)
-            {
-                // Log the detailed error
-                Console.Error.WriteLine($"Error adding event card: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.Error.WriteLine($"Inner exception: {ex.InnerException.Message}");
-                }
+            _context.EventCards.Add(newCard);
+            await _context.SaveChangesAsync();
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the event card.");
-            }
+            return Ok(new { message = "Event card added successfully." });
         }
 
         [HttpPut("{id}")]
