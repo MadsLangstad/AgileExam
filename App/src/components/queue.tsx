@@ -24,6 +24,7 @@ const Queue: React.FC = () => {
               queueId: queueItem.queueId,
               title: mediaCard.url,
               imgUrl: mediaCard.url,
+              fileType: mediaCard.fileType,
             };
           } else {
             return null;
