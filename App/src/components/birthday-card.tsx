@@ -1,17 +1,29 @@
-import { BirthdayCardProps } from "./type";
+import React from "react";
+import { BirthdayCard } from "./type";
 
-const BirthdayCard: React.FC<BirthdayCardProps> = ({ title, imgUrl, text }) => {
+interface BirthdayCardProps extends BirthdayCard {}
+
+const NewBirthdayCard: React.FC<BirthdayCardProps> = ({
+  title,
+  content,
+  imageUrl,
+}) => {
+  console.log("BirthdayCard URL: " + imageUrl);
   return (
-    <div className="birthday flex justify-center items-center h-[500px] w-[450px] bg-blue-400 rounded-md hover:scale-110 transition-all duration-300">
-      <div className="flex-1 p-4">
-        <img src={imgUrl} alt={title} />
-      </div>
-      <div className="flex-1 bg-green-400 p-4">
-        <h2>{title}</h2>
-        <p>{text}</p>
+    <div
+      className={`birthday flex justify-center items-center h-full w-full bg-cover bg-no-repeat rounded-md hover:scale-110 transition-all duration-300`}
+      style={{
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="bg-white p-4 min h-[300px] w-[250px] flex justify-center items-center flex-col rounded-md">
+        <h2 className="text-xl font-bold text-blue-400">{title}</h2>
+        <p className="text-sm p-6">{content}</p>
       </div>
     </div>
   );
 };
 
-export default BirthdayCard;
+export default NewBirthdayCard;

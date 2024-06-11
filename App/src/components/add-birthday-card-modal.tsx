@@ -46,7 +46,6 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({
     };
 
     try {
-      // Add the new birthday card
       const cardResponse = await axios.post(
         "http://localhost:5017/api/upload/addBirthdayCard",
         newCard
@@ -54,7 +53,6 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({
       const birthdayCardId = cardResponse.data.birthdayCardId;
       console.log("Added birthday card:", cardResponse.data);
 
-      // Add the birthday card to the queue
       const newQueueItem = {
         cardType: "birthday",
         birthdayCardId,
@@ -68,8 +66,6 @@ const AddBirthdayCardModal: React.FC<AddBirthdayCardModalProps> = ({
 
       setIsSuccess(true);
       setStatusMessage("Birthday card added to queue successfully");
-
-      // Clear all fields and reset background
       setTitle("");
       setDate(new Date().toISOString().slice(0, 10));
       setBodyText("");

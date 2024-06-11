@@ -1,12 +1,7 @@
 // app-service.ts
 
 import axios from "axios";
-import {
-  Queue,
-  MediaCard,
-  BirthdayCard,
-  EventCard,
-} from "../components/new-type";
+import { Queue, MediaCard, BirthdayCard, EventCard } from "../components/type";
 
 const QueueService = (() => {
   const apiEndpoints = {

@@ -6,6 +6,7 @@ namespace AgileExam.Models
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? ImageUrl { get; set; }
+        public DateTime Date { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
     }

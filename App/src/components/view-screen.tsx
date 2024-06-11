@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import QueueService from "../services/app-service";
-import { QueueProps } from "./type";
+import { Queue } from "./type";
+import NewMediaCard from "./media-card";
+import NewBirthdayCard from "./birthday-card";
+import NewEventCard from "./event-card";
 
 const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
   onImageChange,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cards, setCards] = useState<{ imgUrl: string; fileType: string }[]>(
-    []
-  );
-
+  const [cards, setCards] = useState<Queue[]>([]);
   const baseUrl = "http://localhost:5017";
 
   useEffect(() => {
@@ -19,26 +19,29 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
         console.log("Fetched queue data:", queueData);
 
         const formattedData = await Promise.all(
-          queueData.map(async (queueItem: QueueProps) => {
+          queueData.map(async (queueItem) => {
             if (queueItem.mediaCardId) {
               const mediaCard = await QueueService.getMediaCardById(
                 queueItem.mediaCardId
               );
-              console.log("Fetched media card:", mediaCard);
-              return {
-                imgUrl: mediaCard.url,
-                fileType: mediaCard.fileType,
-              };
-            } else {
-              return null;
+              return { ...queueItem, mediaCard };
+            } else if (queueItem.birthdayCardId) {
+              const birthdayCard = await QueueService.getBirthdayCardById(
+                queueItem.birthdayCardId
+              );
+              return { ...queueItem, birthdayCard };
+            } else if (queueItem.eventCardId) {
+              const eventCard = await QueueService.getEventCardById(
+                queueItem.eventCardId
+              );
+              return { ...queueItem, eventCard };
             }
+            return queueItem;
           })
         );
 
-        const filteredData = formattedData.filter((item) => item !== null);
-        console.log("Formatted data:", filteredData);
-
-        setCards(filteredData as { imgUrl: string; fileType: string }[]);
+        console.log("Formatted data:", formattedData);
+        setCards(formattedData);
       } catch (error) {
         console.error("Error fetching cards:", error);
       }
@@ -59,56 +62,29 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
 
   useEffect(() => {
     if (cards.length > 0) {
-      console.log("Current image URL:", cards[currentIndex]?.imgUrl);
-      onImageChange(`${baseUrl}${cards[currentIndex]?.imgUrl}`);
+      const currentCard = cards[currentIndex];
+      if (currentCard.mediaCard) {
+        onImageChange(`${baseUrl}${currentCard.mediaCard.url}`);
+      }
     }
   }, [currentIndex, cards, onImageChange]);
 
-  const currentMedia = cards[currentIndex];
-  const fullUrl = currentMedia ? `${baseUrl}${currentMedia.imgUrl}` : null;
-  const isVideo = currentMedia?.fileType.startsWith("video/");
+  const currentCard = cards[currentIndex];
 
-  const validTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/gif",
-    "image/bmp",
-    "image/webp",
-    "image/svg+xml",
-    "image/tiff",
-    "image/x-icon",
-    "video/mp4",
-    "video/mpeg",
-    "video/quicktime",
-    "video/x-msvideo",
-    "video/x-matroska",
-    "video/webm",
-    "video/ogg",
-    "video/3gpp",
-    "video/x-flv",
-  ];
-
-  if (!validTypes.includes(currentMedia?.fileType || "")) {
-    return <div>Unsupported media type</div>;
+  if (!currentCard) {
+    return <p>No media available</p>;
   }
 
   return (
     <div className="w-full h-full overflow-hidden flex justify-center items-center">
-      {fullUrl ? (
-        isVideo ? (
-          <video className="object-cover w-full h-full" controls>
-            <source src={fullUrl} type={currentMedia.fileType} />
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          <img
-            src={fullUrl}
-            className="object-cover w-full h-full"
-            alt="Current Display"
-          />
-        )
-      ) : (
-        <p>No media available</p>
+      {currentCard.mediaCardId && currentCard.mediaCard && (
+        <NewMediaCard {...currentCard.mediaCard} />
+      )}
+      {currentCard.birthdayCardId && currentCard.birthdayCard && (
+        <NewBirthdayCard {...currentCard.birthdayCard} />
+      )}
+      {currentCard.eventCardId && currentCard.eventCard && (
+        <NewEventCard {...currentCard.eventCard} />
       )}
     </div>
   );
