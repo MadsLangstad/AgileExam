@@ -26,6 +26,9 @@ namespace Api.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 

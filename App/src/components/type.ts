@@ -1,36 +1,58 @@
-export interface MediaCardProps {
-  type: "media";
-  mediaCardId: number;
-  title: string;
-  imgUrl: string;
-  fileType: string;
+export interface User {
+  userId: number;
 }
 
-export interface BirthdayCardProps {
-  mediaCardId: number;
-  type: "birthday";
-  title: string;
-  imgUrl: string;
-  text: string;
+export interface BirthdayCard {
+  birthdayCardId: number;
+  title?: string;
+  content?: string;
+  imageUrl?: string;
+  date?: Date;
+  userId: number;
+  user?: User;
 }
 
-export interface QueueProps {
-  queueId: number;
-  cardType: string;
-  birthDayCardId: number;
-  mediaCardId: number;
-  startDate: Date;
-  endDate: Date;
-  duration: number;
+export interface EventCard {
+  eventCardId: number;
+  location?: string;
+  date?: string;
+  time: Date;
+  duration?: number;
+  title?: string;
+  description?: string;
+  userId: number;
+  user?: User;
 }
 
-export interface HistoryProps {
+export interface History {
   historyId: number;
   queueId: number;
+  queue?: Queue;
   startDate: Date;
   endDate: Date;
-  title: string;
-  description: string;
 }
 
-export type CardProps = MediaCardProps | BirthdayCardProps;
+export interface MediaCard {
+  mediaCardId: number;
+  url?: string;
+  userId: number;
+  user?: User;
+  fileType?: string;
+  uploadDate: Date;
+}
+
+export interface Queue {
+  queueId: number;
+  cardType?: string;
+  birthdayCardId?: number;
+  birthdayCard?: BirthdayCard;
+  mediaCardId?: number;
+  mediaCard?: MediaCard;
+  eventCardId?: number;
+  eventCard?: EventCard;
+  startDate?: Date;
+  endDate?: Date;
+  durationMinutes?: number;
+  durationHours?: number;
+  histories?: History[];
+}

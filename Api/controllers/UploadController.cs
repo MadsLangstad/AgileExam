@@ -80,17 +80,18 @@ namespace Api.Controllers
         }
 
         [HttpPost("addBirthdayCard")]
-        public async Task<IActionResult> AddBirthdayCard([FromBody] BirthdayCard birthdayCard)
-        {
-            if (birthdayCard == null || string.IsNullOrWhiteSpace(birthdayCard.Title) || string.IsNullOrWhiteSpace(birthdayCard.Content))
-            {
-                return BadRequest(new { message = "Invalid birthday card data." });
-            }
+public async Task<IActionResult> AddBirthdayCard([FromBody] BirthdayCard birthdayCard)
+{
+    if (birthdayCard == null || string.IsNullOrWhiteSpace(birthdayCard.Title) || string.IsNullOrWhiteSpace(birthdayCard.Content))
+    {
+        return BadRequest(new { message = "Invalid birthday card data." });
+    }
 
-            _context.BirthdayCards.Add(birthdayCard);
-            await _context.SaveChangesAsync();
+    _context.BirthdayCards.Add(birthdayCard);
+    await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Birthday card added successfully." });
-        }
+    return Ok(new { birthdayCardId = birthdayCard.BirthdayCardId, message = "Birthday card added successfully." });
+}
+
     }
 }
