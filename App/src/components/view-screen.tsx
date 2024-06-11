@@ -6,7 +6,9 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
   onImageChange,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cards, setCards] = useState<{ imgUrl: string }[]>([]);
+  const [cards, setCards] = useState<{ imgUrl: string; fileType: string }[]>(
+    []
+  );
 
   const baseUrl = "http://localhost:5017";
 
@@ -25,6 +27,7 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
               console.log("Fetched media card:", mediaCard);
               return {
                 imgUrl: mediaCard.url,
+                fileType: mediaCard.fileType,
               };
             } else {
               return null;
@@ -35,7 +38,7 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
         const filteredData = formattedData.filter((item) => item !== null);
         console.log("Formatted data:", filteredData);
 
-        setCards(filteredData as { imgUrl: string }[]);
+        setCards(filteredData as { imgUrl: string; fileType: string }[]);
       } catch (error) {
         console.error("Error fetching cards:", error);
       }
@@ -61,18 +64,27 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
     }
   }, [currentIndex, cards, onImageChange]);
 
-  const currentImg = `${baseUrl}${cards[currentIndex]?.imgUrl}`;
+  const currentMedia = cards[currentIndex];
+  const fullUrl = currentMedia ? `${baseUrl}${currentMedia.imgUrl}` : null;
+  const isVideo = currentMedia?.fileType.startsWith("video/");
 
   return (
     <div className="w-full h-full overflow-hidden flex justify-center items-center">
-      {currentImg ? (
-        <img
-          src={currentImg}
-          className="object-cover w-full h-full"
-          alt="Current Display"
-        />
+      {fullUrl ? (
+        isVideo ? (
+          <video className="object-cover w-full h-full" controls>
+            <source src={fullUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img
+            src={fullUrl}
+            className="object-cover w-full h-full"
+            alt="Current Display"
+          />
+        )
       ) : (
-        <p>No image available</p>
+        <p>No media available</p>
       )}
     </div>
   );

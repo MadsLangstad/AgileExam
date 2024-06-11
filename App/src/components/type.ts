@@ -3,6 +3,7 @@ export interface MediaCardProps {
   mediaCardId: number;
   title: string;
   imgUrl: string;
+  fileType: string;
 }
 
 export interface BirthdayCardProps {
