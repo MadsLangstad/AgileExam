@@ -68,12 +68,36 @@ const ViewScreen: React.FC<{ onImageChange: (image: string) => void }> = ({
   const fullUrl = currentMedia ? `${baseUrl}${currentMedia.imgUrl}` : null;
   const isVideo = currentMedia?.fileType.startsWith("video/");
 
+  const validTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/bmp",
+    "image/webp",
+    "image/svg+xml",
+    "image/tiff",
+    "image/x-icon",
+    "video/mp4",
+    "video/mpeg",
+    "video/quicktime",
+    "video/x-msvideo",
+    "video/x-matroska",
+    "video/webm",
+    "video/ogg",
+    "video/3gpp",
+    "video/x-flv",
+  ];
+
+  if (!validTypes.includes(currentMedia?.fileType || "")) {
+    return <div>Unsupported media type</div>;
+  }
+
   return (
     <div className="w-full h-full overflow-hidden flex justify-center items-center">
       {fullUrl ? (
         isVideo ? (
           <video className="object-cover w-full h-full" controls>
-            <source src={fullUrl} type="video/mp4" />
+            <source src={fullUrl} type={currentMedia.fileType} />
             Your browser does not support the video tag.
           </video>
         ) : (
