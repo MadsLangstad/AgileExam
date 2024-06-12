@@ -32,13 +32,13 @@ namespace AgileExam.Contexts
                 .HasOne(q => q.BirthdayCard)
                 .WithOne()
                 .HasForeignKey<Queue>(q => q.BirthdayCardId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Queue>()
                 .HasOne(q => q.MediaCard)
                 .WithOne()
                 .HasForeignKey<Queue>(q => q.MediaCardId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<Queue>()
                 .HasOne(q => q.EventCard)

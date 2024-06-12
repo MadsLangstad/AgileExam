@@ -1,16 +1,37 @@
 import React from "react";
 import { MediaCard } from "./type";
+import CardOverlay from "./card-overlay";
+import QueueService from "../services/app-service";
 
-interface MediaCardProps extends MediaCard {}
+interface MediaCardProps extends MediaCard {
+  mediaCardId: number; // Ensure this is included
+  handleDeleteCard: (mediaCardId: number) => void;
+}
 
-const NewMediaCard: React.FC<MediaCardProps> = ({ url, fileType }) => {
+const NewMediaCard: React.FC<MediaCardProps> = ({
+  url,
+  fileType,
+  mediaCardId,
+  handleDeleteCard
+}) => {
+
   const isVideo = fileType?.startsWith("video/");
   const baseUrl = "http://localhost:5017";
   const fullUrl = `${baseUrl}${url}`;
   console.log("MediaCard URL: " + fullUrl);
 
+  const handleDelete = async () => {
+    try {
+      await QueueService.deleteMediaCard(mediaCardId);
+      console.log("Deleted Media Card");
+      handleDeleteCard(mediaCardId);
+    } catch (error) {
+      console.error("Error deleting Media Card", error);
+    }
+  };
+
   return (
-    <div className="media flex flex-col justify-center items-center rounded-md hover:scale-110 transition-all duration-300">
+    <div className="relative group media flex flex-col justify-center items-center rounded-md hover:scale-110 transition-all duration-300">
       {isVideo ? (
         <video className="h-full w-full" controls>
           <source src={fullUrl} type={fileType} />
@@ -19,6 +40,7 @@ const NewMediaCard: React.FC<MediaCardProps> = ({ url, fileType }) => {
       ) : (
         <img className="h-full w-full" src={fullUrl} alt="media" />
       )}
+      <CardOverlay onDelete={handleDelete} />
     </div>
   );
 };

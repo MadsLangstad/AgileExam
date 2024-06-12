@@ -64,5 +64,17 @@ namespace AgileExam.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var card = await _context.EventCards.FindAsync(id);
+            if (card == null) return NotFound();
+
+            _context.EventCards.Remove(card);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
