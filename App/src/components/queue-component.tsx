@@ -59,6 +59,10 @@ const QueueComponent: React.FC = () => {
     fetchCards();
   }, []);
 
+  const handleDeleteCard = (queueId: number) => {
+    setCards(cards.filter(card => card.queueId !== queueId));
+  };
+
   console.log("Current state of cards:", cards);
 
   return (
@@ -70,13 +74,25 @@ const QueueComponent: React.FC = () => {
             className="flex items-center justify-center h-full w-full"
           >
             {card.mediaCardId && card.mediaCard && (
-              <NewMediaCard {...card.mediaCard} />
+              <NewMediaCard
+                {...card.mediaCard}
+                mediaCardId={card.mediaCardId} // Ensure this line correctly passes mediaCardId
+                handleDeleteCard={() => handleDeleteCard(card.queueId)}
+              />
             )}
             {card.birthdayCardId && card.birthdayCard && (
-              <NewBirthdayCard {...card.birthdayCard} />
+              <NewBirthdayCard
+                {...card.birthdayCard}
+                birthdayCardId={card.birthdayCardId} 
+                handleDeleteCard={() => handleDeleteCard(card.queueId)}
+              />
             )}
             {card.eventCardId && card.eventCard && (
-              <NewEventCard {...card.eventCard} />
+              <NewEventCard 
+                {...card.eventCard} 
+                eventCardId={card.eventCardId} 
+                handleDeleteCard={() => handleDeleteCard(card.queueId)} 
+              />
             )}
           </div>
         ))}

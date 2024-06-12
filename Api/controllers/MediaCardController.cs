@@ -60,10 +60,13 @@ namespace AgileExam.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteMediaCard(int id)
         {
             var card = await _context.MediaCards.FindAsync(id);
-            if (card == null) return NotFound();
+            if (card == null)
+            {
+                return NotFound();
+            }
 
             _context.MediaCards.Remove(card);
             await _context.SaveChangesAsync();

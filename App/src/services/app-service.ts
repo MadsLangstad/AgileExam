@@ -1,5 +1,3 @@
-// app-service.ts
-
 import axios from "axios";
 import { Queue, MediaCard, BirthdayCard, EventCard } from "../components/type";
 
@@ -36,6 +34,16 @@ const QueueService = (() => {
     }
   };
 
+  const deleteMediaCard = async (id: number) => {
+    try {
+      await axios.delete(`${apiEndpoints.MediaCard}/${id}`);
+      console.log(`Deleted media card with id ${id}`);
+    } catch (error) {
+      console.error(`Error deleting media card with id ${id}`, error);
+      throw error;
+    }
+  };
+
   const getBirthdayCardById = async (id: number): Promise<BirthdayCard> => {
     try {
       const result = await axios.get<BirthdayCard>(
@@ -44,6 +52,16 @@ const QueueService = (() => {
       return result.data;
     } catch (error) {
       console.error(`Error in getting birthday card by id ${id}`, error);
+      throw error;
+    }
+  };
+
+  const deleteBirthdayCard = async (id: number) => {
+    try {
+      await axios.delete(`${apiEndpoints.BirthdayCard}/${id}`);
+      console.log(`Deleted birthday card with id ${id}`);
+    } catch (error) {
+      console.error(`Error deleting birthday card with id ${id}`, error);
       throw error;
     }
   };
@@ -59,6 +77,16 @@ const QueueService = (() => {
       throw error;
     }
   };
+
+  const deleteEventCard = async (id: number) => {
+    try {
+      await axios.delete(`${apiEndpoints.EventCard}/${id}`);
+      console.log(`Deleted event card with id ${id}`);
+    } catch (error) {
+      console.error(`Error deleting event card with id ${id}`, error);
+      throw error;
+    }
+  }
 
   const getAllHistories = async (): Promise<History[]> => {
     try {
@@ -76,6 +104,9 @@ const QueueService = (() => {
     getAllHistories,
     getEventCardById,
     getBirthdayCardById,
+    deleteEventCard,
+    deleteBirthdayCard,
+    deleteMediaCard,
   };
 })();
 
