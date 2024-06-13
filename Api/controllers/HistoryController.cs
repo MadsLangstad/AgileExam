@@ -33,9 +33,24 @@ namespace AgileExam.Controllers
         [HttpPost]
         public async Task<ActionResult<History>> Post(History history)
         {
+            // Validate the existence of the referenced QueueId
+            if (!await _context.Queue.AnyAsync(q => q.QueueId == history.QueueId))
+            {
+                return BadRequest("Invalid QueueId");
+            }
+
             _context.Histories.Add(history);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = history.HistoryId }, history);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(Get), new { id = history.HistoryId }, history);
+            }
+            catch (DbUpdateException ex)
+            {
+                // Log the detailed error message
+                Console.WriteLine(ex.InnerException?.Message);
+                return StatusCode(500, "Internal server error. Please check the logs for more details.");
+            }
         }
 
         [HttpPut("{id}")]

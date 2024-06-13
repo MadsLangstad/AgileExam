@@ -4,7 +4,8 @@ import CardOverlay from "./card-overlay";
 import QueueService from "../services/app-service";
 
 interface MediaCardProps extends MediaCard {
-  mediaCardId: number; // Ensure this is included
+  mediaCardId: number;
+  queueId: number;
   handleDeleteCard: (mediaCardId: number) => void;
 }
 
@@ -12,6 +13,7 @@ const NewMediaCard: React.FC<MediaCardProps> = ({
   url,
   fileType,
   mediaCardId,
+  queueId,
   handleDeleteCard
 }) => {
 
@@ -22,7 +24,7 @@ const NewMediaCard: React.FC<MediaCardProps> = ({
 
   const handleDelete = async () => {
     try {
-      await QueueService.deleteMediaCard(mediaCardId);
+      await QueueService.deleteMediaCard(mediaCardId, queueId);
       console.log("Deleted Media Card");
       handleDeleteCard(mediaCardId);
     } catch (error) {

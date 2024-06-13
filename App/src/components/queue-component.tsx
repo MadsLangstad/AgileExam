@@ -8,7 +8,7 @@ import QueueService from "../services/app-service";
 import NewMediaCard from "./media-card";
 import NewBirthdayCard from "./birthday-card";
 import NewEventCard from "./event-card";
-import { Queue } from "./type";
+import { Queue } from "./type"; 
 
 const QueueComponent: React.FC = () => {
   const [cards, setCards] = useState<Queue[]>([]);
@@ -76,21 +76,24 @@ const QueueComponent: React.FC = () => {
             {card.mediaCardId && card.mediaCard && (
               <NewMediaCard
                 {...card.mediaCard}
-                mediaCardId={card.mediaCardId} // Ensure this line correctly passes mediaCardId
+                mediaCardId={card.mediaCardId}
+                queueId={card.queueId}
                 handleDeleteCard={() => handleDeleteCard(card.queueId)}
               />
             )}
             {card.birthdayCardId && card.birthdayCard && (
               <NewBirthdayCard
                 {...card.birthdayCard}
-                birthdayCardId={card.birthdayCardId} 
+                birthdayCardId={card.birthdayCardId}
+                queueId={card.queueId}
                 handleDeleteCard={() => handleDeleteCard(card.queueId)}
               />
             )}
             {card.eventCardId && card.eventCard && (
               <NewEventCard 
                 {...card.eventCard} 
-                eventCardId={card.eventCardId} 
+                eventCardId={card.eventCardId}
+                queueId={card.queueId}
                 handleDeleteCard={() => handleDeleteCard(card.queueId)} 
               />
             )}

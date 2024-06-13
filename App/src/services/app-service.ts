@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Queue, MediaCard, BirthdayCard, EventCard } from "../components/type";
+import { Queue, MediaCard, BirthdayCard, EventCard, History } from "../components/type";
 
 const QueueService = (() => {
   const apiEndpoints = {
@@ -34,15 +34,26 @@ const QueueService = (() => {
     }
   };
 
-  const deleteMediaCard = async (id: number) => {
+  const deleteMediaCard = async (id: number, queueId: number) => {
+    console.log("QueueId!!!", queueId);
+    const payload = {
+      historyId: 1,
+      queueId: queueId,
+      startDate: new Date(),
+      endDate: new Date(),
+    };
     try {
+      console.log(`Added media card with id ${id} to history`);
       await axios.delete(`${apiEndpoints.MediaCard}/${id}`);
+      console.log("Sending payload to History endpoint:", payload);
+      await axios.post(`${apiEndpoints.History}`, payload);
       console.log(`Deleted media card with id ${id}`);
     } catch (error) {
       console.error(`Error deleting media card with id ${id}`, error);
       throw error;
     }
   };
+  
 
   const getBirthdayCardById = async (id: number): Promise<BirthdayCard> => {
     try {
@@ -56,8 +67,10 @@ const QueueService = (() => {
     }
   };
 
-  const deleteBirthdayCard = async (id: number) => {
+  const deleteBirthdayCard = async (id: number, queueId: number) => {
     try {
+      await axios.post(`${apiEndpoints.History}`, { birthdayCardId: id, queueId: queueId });
+      console.log(`Added birthday card with id ${id} to history`);
       await axios.delete(`${apiEndpoints.BirthdayCard}/${id}`);
       console.log(`Deleted birthday card with id ${id}`);
     } catch (error) {
@@ -78,8 +91,10 @@ const QueueService = (() => {
     }
   };
 
-  const deleteEventCard = async (id: number) => {
+  const deleteEventCard = async (id: number, queueId: number) => {
     try {
+      await axios.post(`${apiEndpoints.History}`, { eventCardId: id, queueId: queueId });
+      console.log(`Added event card with id ${id} to history`);
       await axios.delete(`${apiEndpoints.EventCard}/${id}`);
       console.log(`Deleted event card with id ${id}`);
     } catch (error) {
